@@ -27,7 +27,7 @@ export class ZoomUI {
 
 		//moveRight
 		cont.appendChild(
-			DomHelper.createGlyphiconButton("moveViewLeftButton", "arrow-right", () =>
+			DomHelper.createGlyphiconButton("moveViewRightButton", "arrow-right", () =>
 				render.renderDimensions.moveViewRight()
 			)
 		)
