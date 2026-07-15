@@ -76,13 +76,9 @@ function renderLoop() {
 	window.requestAnimationFrame(renderLoop)
 }
 async function loadStartingSong() {
-	const domain = window.location.href
-	let url = "https://midiano.com/mz_331_3.mid?raw=true" // "https://bewelge.github.io/piano-midi.de-Files/midi/alb_esp1.mid?raw=true" //
-	if (domain.split("github").length > 1) {
-		url = "https://Bewelge.github.io/MIDIano/mz_331_3.mid?raw=true"
-	}
+	let url = "./mz_331_3.mid"
 
 	FileLoader.loadSongFromURL(url, (response, fileName) =>
 		getPlayer().loadSong(response, fileName, "Mozart - Turkish March")
-	) // Local: "../mz_331_3.mid")
+	)
 }

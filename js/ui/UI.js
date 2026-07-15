@@ -164,7 +164,8 @@ export class UI {
 		let trackGrp = DomHelper.createButtonGroup(true)
 		DomHelper.appendChildren(trackGrp, [
 			this.getTracksButton(),
-			this.getMidiSetupButton()
+			this.getMidiSetupButton(),
+			this.getLearnButton()
 			// this.getChannelsButton()
 		])
 		return trackGrp
@@ -563,6 +564,86 @@ export class UI {
 
 		this.showDiv(this.getMidiSetupDialog())
 	}
+
+	getLearnButton() {
+		if (!this.learnButton) {
+			this.learnButton = DomHelper.createGlyphiconTextButton(
+				"learn",
+				"education",
+				"Learn",
+				ev => {
+					if (this.learnDialogShown) {
+						this.hideLearnDialog()
+					} else {
+						this.showLearnDialog()
+					}
+				}
+			)
+			DomHelper.addClassToElement("floatSpanLeft", this.learnButton)
+		}
+		return this.learnButton
+	}
+
+	hideLearnDialog() {
+		DomHelper.removeClass("selected", this.learnButton)
+		this.learnDialogShown = false
+		this.hideDiv(this.getLearnDialog())
+	}
+
+	showLearnDialog() {
+		this.hideAllDialogs()
+		DomHelper.addClassToElement("selected", this.learnButton)
+		this.learnDialogShown = true
+
+		this.showDiv(this.getLearnDialog())
+	}
+
+	getLearnDialog() {
+		if (!this.learnDialog) {
+			this.learnDialog = DomHelper.createDivWithIdAndClass(
+				"learnDialog",
+				"centeredMenuDiv"
+			)
+			this.hideDiv(this.learnDialog)
+			document.body.appendChild(this.learnDialog)
+
+			let title = DomHelper.createDivWithClass(
+				"centeredBigText",
+				{ marginTop: "25px" },
+				{ innerHTML: "Learn Piano Basics" }
+			)
+			this.learnDialog.appendChild(title)
+
+			let contentDiv = DomHelper.createDivWithClass("container")
+			contentDiv.style.flexDirection = "column"
+			contentDiv.style.textAlign = "left"
+
+			contentDiv.innerHTML = `
+				<h3>Keyboard Layout</h3>
+				<p>A standard piano has 88 keys. The white keys represent the musical tones A, B, C, D, E, F, and G. The black keys represent the sharp (#) or flat (b) notes.</p>
+				<p>Notice the pattern of the black keys: they alternate between groups of two and groups of three. This pattern helps you navigate the keyboard.</p>
+				<p><strong>Middle C</strong> is the most important landmark on the piano. It is the C note nearest to the center of the keyboard. On a standard keyboard, it is the white key immediately to the left of the group of two black keys near the center.</p>
+
+				<h3>Basic Chords</h3>
+				<p>A chord is a group of notes played together. Here are a few basic major and minor chords to get started:</p>
+				<ul>
+					<li><strong>C Major:</strong> C - E - G</li>
+					<li><strong>F Major:</strong> F - A - C</li>
+					<li><strong>G Major:</strong> G - B - D</li>
+					<li><strong>A Minor:</strong> A - C - E</li>
+				</ul>
+
+				<h3>How to play</h3>
+				<p>Select a MIDI file from the top left corner, watch the falling notes, and play along. The notes will guide you on when and which key to press!</p>
+			`
+
+			this.learnDialog.appendChild(contentDiv)
+		}
+		this.learnDialog.style.marginTop =
+			this.getNavBar().clientHeight + 25 + "px"
+		return this.learnDialog
+	}
+
 	getChannelsButton() {
 		if (!this.channelsButton) {
 			let channelMenuDiv = this.getChannelMenuDiv()
@@ -615,6 +696,9 @@ export class UI {
 		this.hideLoadedSongsDiv()
 		this.hideTracks()
 		this.hideLoadedSongsDiv()
+		if (this.learnDialogShown) {
+			this.hideLearnDialog()
+		}
 	}
 
 	getMainVolumeSlider() {

@@ -441,8 +441,8 @@ const defaultSettings = {
 				type: "list",
 				id: "soundfontName",
 				label: "Soundfont",
-				value: "MusyngKite",
-				list: ["MusyngKite", "FluidR3_GM", "FatBoy"],
+				value: "FluidR3_GM",
+				list: ["FluidR3_GM", "MusyngKite", "FatBoy"],
 				onChange: newVal => setSetting("soundfontName", newVal)
 			},
 			{
