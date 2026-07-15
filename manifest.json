@@ -1,0 +1,15 @@
+{
+  "name": "MIDIano",
+  "short_name": "MIDIano",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#424242",
+  "theme_color": "#424242",
+  "icons": [
+    {
+      "src": "images/logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
