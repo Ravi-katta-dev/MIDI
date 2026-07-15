@@ -103,6 +103,12 @@ export class DomHelper {
 	static createGlyphiconButton(id, glyph, onClick) {
 		let bt = DomHelper.createButton(id, onClick)
 		bt.appendChild(this.getGlyphicon(glyph))
+
+		let label = id.replace(/Button$/, "").replace(/([A-Z])/g, " $1").trim()
+		label = label.charAt(0).toUpperCase() + label.toLowerCase().slice(1)
+		bt.setAttribute("aria-label", label)
+		bt.setAttribute("title", label)
+
 		return bt
 	}
 	static createGlyphiconTextButton(id, glyph, text, onClick) {

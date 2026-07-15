@@ -441,7 +441,7 @@ export class UI {
 	getSpeedUpButton() {
 		if (!this.speedUpButton) {
 			this.speedUpButton = DomHelper.createGlyphiconButton(
-				"speedUp",
+					"speedUpButton",
 				"triangle-top",
 				ev => {
 					getPlayer().increaseSpeed(0.05)
@@ -482,7 +482,7 @@ export class UI {
 	getSpeedDownButton() {
 		if (!this.speedDownButton) {
 			this.speedDownButton = DomHelper.createGlyphiconButton(
-				"speedUp",
+					"speedDownButton",
 				"triangle-bottom",
 				ev => {
 					getPlayer().increaseSpeed(-0.05)
