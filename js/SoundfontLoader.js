@@ -7,10 +7,9 @@ export class SoundfontLoader {
 	 * @param {String} instrument
 	 */
 	static async loadInstrument(instrument, soundfontName) {
-		let baseUrl = "https://gleitz.github.io/midi-js-soundfonts/"
+		let baseUrl = "./"
 		if (instrument == "percussion") {
 			soundfontName = "FluidR3_GM"
-			baseUrl = ""
 		}
 		let fileType = iOS ? "mp3" : "ogg"
 		return fetch(

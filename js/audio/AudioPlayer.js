@@ -14,7 +14,7 @@ export class AudioPlayer {
 		this.context = new AudioContext()
 		this.buffers = {}
 		this.audioNotes = []
-		this.soundfontName = "MusyngKite"
+		this.soundfontName = "FluidR3_GM"
 
 		this.loadMetronomeSounds()
 	}
