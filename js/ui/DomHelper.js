@@ -49,7 +49,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(id, val, min, max, step, onChange)
 		cont.appendChild(labelDiv)
@@ -84,7 +84,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(
 			id,
@@ -190,16 +190,15 @@ export class DomHelper {
 		checkbox.setAttribute("type", "checkbox")
 		checkbox.checked = value
 		checkbox.setAttribute("name", id)
+		checkbox.setAttribute("id", id)
 		checkbox.onchange = onChange
 
 		let label = DomHelper.createElementWithClass(
 			"checkboxlabel",
 			"label",
 			{},
-			{ innerHTML: text, for: id }
+			{ innerHTML: text, htmlFor: id }
 		)
-
-		label.setAttribute("for", id)
 
 		cont.appendChild(checkbox)
 		cont.appendChild(label)
@@ -249,7 +248,7 @@ export class DomHelper {
 		let customFile = DomHelper.createElement(
 			"label",
 			{},
-			{ className: "btn btn-default btn-file" }
+			{ className: "btn btn-default btn-file", tabIndex: "0", role: "button" }
 		)
 		customFile.appendChild(DomHelper.getGlyphicon("folder-open"))
 		customFile.innerHTML += " " + text
@@ -261,6 +260,13 @@ export class DomHelper {
 
 		customFile.appendChild(inp)
 		inp.onchange = callback
+
+		customFile.onkeydown = ev => {
+			if (ev.key === "Enter" || ev.key === " ") {
+				ev.preventDefault()
+				inp.click()
+			}
+		}
 
 		return customFile
 	}
@@ -319,7 +325,7 @@ export class DomHelper {
 			"inputSelectLabel",
 			"label",
 			{},
-			{ innerHTML: title }
+			{ innerHTML: title, htmlFor: title }
 		)
 		selectBox.appendChild(label)
 		let selectTag = DomHelper.createElementWithIdAndClass(
