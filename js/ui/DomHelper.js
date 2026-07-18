@@ -49,7 +49,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(id, val, min, max, step, onChange)
 		cont.appendChild(labelDiv)
@@ -84,7 +84,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(
 			id,
@@ -190,16 +190,15 @@ export class DomHelper {
 		checkbox.setAttribute("type", "checkbox")
 		checkbox.checked = value
 		checkbox.setAttribute("name", id)
+		checkbox.setAttribute("id", id)
 		checkbox.onchange = onChange
 
 		let label = DomHelper.createElementWithClass(
 			"checkboxlabel",
 			"label",
 			{},
-			{ innerHTML: text, for: id }
+			{ innerHTML: text, htmlFor: id }
 		)
-
-		label.setAttribute("for", id)
 
 		cont.appendChild(checkbox)
 		cont.appendChild(label)
@@ -319,7 +318,7 @@ export class DomHelper {
 			"inputSelectLabel",
 			"label",
 			{},
-			{ innerHTML: title }
+			{ innerHTML: title, htmlFor: title }
 		)
 		selectBox.appendChild(label)
 		let selectTag = DomHelper.createElementWithIdAndClass(
