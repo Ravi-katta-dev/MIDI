@@ -49,7 +49,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(id, val, min, max, step, onChange)
 		cont.appendChild(labelDiv)
@@ -84,7 +84,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(
 			id,
@@ -185,9 +185,11 @@ export class DomHelper {
 	}
 	static createCheckbox(text, onChange, value, isChecked) {
 		let id = replaceAllString(text, " ", "") + "checkbox"
+		let inputId = id + "Input"
 		let cont = DomHelper.createDivWithIdAndClass(id, "checkboxCont")
 		let checkbox = DomHelper.createElementWithClass("checkboxInput", "input")
 		checkbox.setAttribute("type", "checkbox")
+		checkbox.setAttribute("id", inputId)
 		checkbox.checked = value
 		checkbox.setAttribute("name", id)
 		checkbox.onchange = onChange
@@ -196,10 +198,10 @@ export class DomHelper {
 			"checkboxlabel",
 			"label",
 			{},
-			{ innerHTML: text, for: id }
+			{ innerHTML: text, for: inputId, htmlFor: inputId }
 		)
 
-		label.setAttribute("for", id)
+		label.setAttribute("for", inputId)
 
 		cont.appendChild(checkbox)
 		cont.appendChild(label)
@@ -314,16 +316,18 @@ export class DomHelper {
 	}
 
 	static createInputSelect(title, items, callback) {
-		let selectBox = DomHelper.createDivWithId(title)
+		let containerId = title + "Container"
+		let selectId = title
+		let selectBox = DomHelper.createDivWithId(containerId)
 		let label = DomHelper.createElementWithClass(
 			"inputSelectLabel",
 			"label",
 			{},
-			{ innerHTML: title }
+			{ innerHTML: title, htmlFor: selectId }
 		)
 		selectBox.appendChild(label)
 		let selectTag = DomHelper.createElementWithIdAndClass(
-			title,
+			selectId,
 			"inputSelect",
 			"select"
 		)
