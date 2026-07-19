@@ -54,9 +54,6 @@ window.onload = async function () {
 	await init()
 	loading = true
 
-	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/sw.js')
-	}
 	//	loadSongFromURL("http://www.piano-midi.de/midis/brahms/brahms_opus1_1_format0.mid")
 }
 
