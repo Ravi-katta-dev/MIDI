@@ -49,7 +49,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(id, val, min, max, step, onChange)
 		cont.appendChild(labelDiv)
@@ -84,7 +84,7 @@ export class DomHelper {
 		let labelDiv = DomHelper.createElement(
 			"label",
 			{},
-			{ id: id + "label", className: "sliderLabel", innerHTML: label }
+			{ id: id + "label", className: "sliderLabel", innerHTML: label, htmlFor: id }
 		)
 		let slider = DomHelper.createSlider(
 			id,
@@ -185,8 +185,8 @@ export class DomHelper {
 	}
 	static createCheckbox(text, onChange, value, isChecked) {
 		let id = replaceAllString(text, " ", "") + "checkbox"
-		let cont = DomHelper.createDivWithIdAndClass(id, "checkboxCont")
-		let checkbox = DomHelper.createElementWithClass("checkboxInput", "input")
+		let cont = DomHelper.createDivWithIdAndClass(id + "Cont", "checkboxCont")
+		let checkbox = DomHelper.createElementWithClass("checkboxInput", "input", {}, { id: id })
 		checkbox.setAttribute("type", "checkbox")
 		checkbox.checked = value
 		checkbox.setAttribute("name", id)
@@ -196,10 +196,8 @@ export class DomHelper {
 			"checkboxlabel",
 			"label",
 			{},
-			{ innerHTML: text, for: id }
+			{ innerHTML: text, htmlFor: id }
 		)
-
-		label.setAttribute("for", id)
 
 		cont.appendChild(checkbox)
 		cont.appendChild(label)
@@ -249,7 +247,17 @@ export class DomHelper {
 		let customFile = DomHelper.createElement(
 			"label",
 			{},
-			{ className: "btn btn-default btn-file" }
+			{
+				className: "btn btn-default btn-file",
+				tabIndex: "0",
+				role: "button",
+				onkeydown: (e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault()
+						customFile.click()
+					}
+				}
+			}
 		)
 		customFile.appendChild(DomHelper.getGlyphicon("folder-open"))
 		customFile.innerHTML += " " + text
@@ -314,12 +322,12 @@ export class DomHelper {
 	}
 
 	static createInputSelect(title, items, callback) {
-		let selectBox = DomHelper.createDivWithId(title)
+		let selectBox = DomHelper.createDivWithId(title + "Container")
 		let label = DomHelper.createElementWithClass(
 			"inputSelectLabel",
 			"label",
 			{},
-			{ innerHTML: title }
+			{ innerHTML: title, htmlFor: title }
 		)
 		selectBox.appendChild(label)
 		let selectTag = DomHelper.createElementWithIdAndClass(
